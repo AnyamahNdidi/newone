@@ -1,7 +1,7 @@
-const { compareSync } = require("bcrypt")
+
 const myUser = require("../Model/Model")
 const {generateToken} = require("../Config/generateToken")
-const { use } = require("../Router/router")
+
 
 const regUser = async (req, res)=>{
   try{
@@ -41,48 +41,48 @@ const regUser = async (req, res)=>{
   }
 }
 
-const LoginUser = async (req, res) => {
-    try{
-      const {email , name} = req.body
+// const LoginUser = async (req, res) => {
+//     try{
+//       const {email , name} = req.body
 
-      const user = await myUser.findOne({email})
+//       const user = await myUser.findOne({email})
 
-      if(user){
-        const checkPassword = await user.matchPassword(req.body.name, user.name)
-        if(checkPassword){
-          const {zones, ...info} = user._doc
-          const token = generateToken({
-            id:user._id,
-            email:user.email,
-            name:user.name
-          })
+//       if(user){
+//         const checkPassword = await user.matchPassword(req.body.name, user.name)
+//         if(checkPassword){
+//           const {zones, ...info} = user._doc
+//           const token = generateToken({
+//             id:user._id,
+//             email:user.email,
+//             name:user.name
+//           })
           
-          res.status(200).json({
-            message: `melcome back ${user.fullName}`,
-            data:{...info,token}
-          })
+//           res.status(200).json({
+//             message: `melcome back ${user.fullName}`,
+//             data:{...info,token}
+//           })
 
-        }else{
-          res.status(400).json({
-            message : "password is incorrect"
-          })
-        }
-
-
-      }else{
-        res.status(400).json({
-          message : "user doesn't exist"
-        })
-      }
+//         }else{
+//           res.status(400).json({
+//             message : "password is incorrect"
+//           })
+//         }
 
 
+//       }else{
+//         res.status(400).json({
+//           message : "user doesn't exist"
+//         })
+//       }
 
-    }catch(error){
-      res.status(400).json({
-        message : error.message
-      })
-    }
-}
+
+
+//     }catch(error){
+//       res.status(400).json({
+//         message : error.message
+//       })
+//     }
+// }
 
 const getAll = async (req, res) =>{
   try{
@@ -101,6 +101,6 @@ const getAll = async (req, res) =>{
 
 module.exports = {
   regUser,
-  LoginUser,
+  // LoginUser,
   getAll
 }
