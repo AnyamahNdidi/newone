@@ -14,15 +14,7 @@ const regUser = async (req, res)=>{
       return res.status(401).json({message :"this email has already taken"})
     }
 
-    const token = jwt.sign(
-      {
-        id : userExist._id,
-        name : userExist.name,
-        email: userExist.email
-      },
-      "fghjkl;kj",
-      {expiresIn :"1d"}
-    )
+   
 
     const newReg = await myUser.create({
       
@@ -32,6 +24,15 @@ const regUser = async (req, res)=>{
      
 
     })
+     const token = jwt.sign(
+      {
+        id : newReg._id,
+        name : newReg.name,
+        email: newReg.email
+      },
+      "fghjkl;kj",
+      {expiresIn :"1d"}
+    )
     res.status(201).json({
       message:"user Register",
       data:{
