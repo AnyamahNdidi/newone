@@ -1,6 +1,7 @@
 
 const myUser = require("../Model/Model")
-const {generateToken} = require("../Config/generateToken")
+// const {generateToken} = require("../Config/generateToken")
+const jwt = require("jsonwebtoken")
 
 
 const regUser = async (req, res)=>{
@@ -12,6 +13,16 @@ const regUser = async (req, res)=>{
     if(userExist){myUser
       return res.status(401).json({message :"this email has already taken"})
     }
+
+    const token = jwt.sign(
+      {
+        id : userExist._id,
+        name : userExist.name,
+        email: userExist.email
+      },
+      "fghjkl;kj",
+      {expiresIn :"1d"}
+    )
 
     const newReg = await myUser.create({
       
@@ -25,10 +36,7 @@ const regUser = async (req, res)=>{
       message:"user Register",
       data:{
         newReg,
-        token:generateToken({
-          _id:newReg._id,
-          name:newReg.name
-        })
+        token:token
       }
     })
 
