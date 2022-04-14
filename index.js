@@ -8,11 +8,11 @@ const app = express()
 
 
 dotenv.config()
-// app.get("/",(req, res)=>{
-//   res.status(200).json({messgae :"api is ready"})
-// })
+app.get("/",(req, res)=>{
+  res.status(200).json({messgae :"api is ready"})
+})
 app.use(express.json())
-app.use("/api", myRouter )
+// app.use("/api", myRouter )
 
 app.listen(PORT, ()=>{
   console.log( `port is runnig on ${PORT}`)
