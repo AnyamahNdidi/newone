@@ -11,7 +11,7 @@ const app = express()
 
 dotenv.config()
 app.get("/",(req, res)=>{
-  res.status(200).json({messgae :"api is ready"})
+  res.status(200).json({messgae :"api is ready and up"})
 })
 app.use(express.json())
 app.use(cors({origin:"*"}))
