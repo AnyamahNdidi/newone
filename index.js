@@ -5,6 +5,7 @@ const myRouter = require("./Router/router")
 const myRouter2 = require("./Router/LandRouter")
 const dotenv = require("dotenv")
 const cors = require("cors")
+const hostname = '0.0.0.0'
 
 const app = express()
 
